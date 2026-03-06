@@ -13,7 +13,11 @@
     font-family: 'Be Vietnam Pro', 'Segoe UI', sans-serif;
 
 }
-
+#letter-modal .glass-effect {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+}
 body {
     display: flex;
     justify-content: center;
@@ -672,17 +676,28 @@ body {
     </div>
 
     <!-- ===== LETTER MODAL ===== -->
+ 
+   <!-- ===== LETTER MODAL ===== -->
+        <!-- ===== LETTER MODAL ===== -->
+        <!-- ===== LETTER MODAL ===== -->
     <div id="letter-modal" class="modal hidden">
-        <div class="modal-content glass-effect">
-            <button class="close-btn absolute-right" onclick="closeModal('letter-modal')">✕</button>
-            <div class="letter-body">
-                <h2>Send to my fen,</h2>
-                <p>Chúc tụi mày một ngày 8/3 thật ý nghĩa và tràn đầy niềm vui.</p>
-                <p>Chúc tụi mày luôn xinh đẹp, hạnh phúc, sớm lấy chồng 😄</p>
-                <p style="margin-top:20px;font-weight:700;font-size:1rem;">Rồi Nào Nhậu ? <br>— Thái Quốc & Đăng Khoa</p>
-            </div>
+        <div style="position:relative; width:92%; max-height:88%; overflow-y:auto; border-radius:16px; scrollbar-width:none;">
+            <button class="close-btn" onclick="closeModal('letter-modal')"
+                style="position:sticky; top:8px; left:100%; z-index:10; display:block; margin-left:auto; margin-right:8px;">✕</button>
+            <img src="letter.jpg" alt="Lá thư" 
+                style="width:100%; display:block; border-radius:16px; margin-top:-40px;">
         </div>
     </div>
+```
+
+Đặt file ảnh vào cùng thư mục với `index.html`:
+```
+📁 project/
+├── index.html
+├── letter.jpg   ← ảnh lá thư
+├── 📁 images/
+└── 📁 music/
+    ```
 
     <!-- ===== GALLERY MODAL ===== -->
     <div id="gallery-modal" class="modal hidden">
