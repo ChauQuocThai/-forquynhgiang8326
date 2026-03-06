@@ -623,7 +623,7 @@ body {
 
     <!-- ===== MAIN MENU ===== -->
     <section id="main-menu" class="screen hidden">
-        <div class="menu-greeting">🌸 Chúc mừng 8/3 nha các bợn 🌸</div>
+        <div class="menu-greeting">🌸 Chúc mừng 8/3 em iu 🌸</div>
         <div class="menu-grid">
             <div class="menu-item" onclick="openModal('music-modal')">
                 <div class="icon-box">🎵</div>
@@ -718,19 +718,43 @@ body {
     </div>
 
     <!-- ===== GIFT MODAL ===== -->
+    <!-- ===== GIFT MODAL ===== -->
     <div id="gift-modal" class="modal hidden">
         <button class="dark-close" onclick="closeModal('gift-modal')">✕</button>
         <div class="gift-scene">
             <div class="stars" id="stars"></div>
-            <img src="flower.gif" alt="Flower" class="flower-img"
-                 onerror="this.outerHTML='<div class=\'flower-emoji\'>🌹</div>'">
-            <div class="chat-bubble c1 hidden">1 1 1</div>
-            <div class="chat-bubble c2 hidden">2 2 2</div>
-            <div class="chat-bubble c3 hidden">3 zoooooooooooo</div>
+
+            <!-- Bước 1: Text đếm ngược -->
+            <!-- Bước 1: Đếm ngược -->
+        <div id="gift-step1" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; z-index:10; position:absolute; top:0; left:0; width:100%; height:100%;">
+            <div id="gift-countdown" style="font-size:7rem; font-weight:900; color:white; text-shadow:0 0 30px rgba(255,100,150,0.8);">3</div>
+            <div style="font-size:1.2rem; color:rgba(255,255,255,0.85); font-weight:600; text-align:center; line-height:1.6;">
+                Chuẩn bị nhé... 👀<br>
+                <span style="font-size:0.9rem; opacity:0.7;">Nhắm mắt lại sau khi đếm xong</span>
+            </div>
+        </div>
+
+        <!-- Bước 2: Nhắm mắt -->
+        <div id="gift-step2" style="display:none; flex-direction:column; align-items:center; justify-content:center; gap:16px; z-index:10; position:absolute; top:0; left:0; width:100%; height:100%;">
+            <div style="font-size:5rem;">😌</div>
+            <div style="font-size:1.4rem; font-weight:800; color:white; text-align:center; text-shadow:0 0 20px rgba(255,100,150,0.8);">
+                Nhắm mắt lại nào... 🌸
+            </div>
+        </div>
+
+        <!-- Bước 3: Ảnh quà -->
+        <div id="gift-step3" style="display:none; flex-direction:column; align-items:center; justify-content:center; gap:16px; z-index:10; position:absolute; top:0; left:0; width:100%; height:100%; padding:20px;">
+            <div style="font-size:1rem; color:rgba(255,255,255,0.9); font-weight:700; text-align:center;">
+                🎁 Món quà của em 🎁
+            </div>
+            <img src="gift.jpg" alt="Quà" style="width:90%; border-radius:20px; box-shadow:0 0 40px rgba(255,100,150,0.6); animation:zoomIn 0.5s ease;">
+            <div style="font-size:1rem; color:rgba(255,255,255,0.85); text-align:center; font-weight:600;">
+                Yêu em thật nhiều 💗
+            </div>
+        </div>
+
         </div>
     </div>
-
-</div>
 
 <script>
 // ============ PASSCODE ============
@@ -932,13 +956,35 @@ renderPlaylist();
 })();
 
 function runGiftAnimation() {
-    const bubbles = document.querySelectorAll('.chat-bubble');
-    bubbles.forEach(b => { b.classList.add('hidden'); b.style.opacity=0; b.style.transform='translateY(20px)'; });
-    [600, 1600, 2600].forEach((t, i) => setTimeout(() => {
-        bubbles[i].classList.remove('hidden');
-        bubbles[i].style.opacity = 1;
-        bubbles[i].style.transform = 'translateY(0)';
-    }, t));
+    const step1 = document.getElementById('gift-step1');
+    const step2 = document.getElementById('gift-step2');
+    const step3 = document.getElementById('gift-step3');
+    const countEl = document.getElementById('gift-countdown');
+
+    // Reset về bước 1
+    step1.style.display = 'flex';
+    step2.style.display = 'none';
+    step3.style.display = 'none';
+    countEl.textContent = '3';
+
+    let count = 3;
+
+    const timer = setInterval(() => {
+        count--;
+        if (count > 0) {
+            countEl.textContent = String(count);
+        } else {
+            clearInterval(timer);
+            // Bước 2: nhắm mắt
+            step1.style.display = 'none';
+            step2.style.display = 'flex';
+            // Bước 3: hiện ảnh
+            setTimeout(() => {
+                step2.style.display = 'none';
+                step3.style.display = 'flex';
+            }, 2000);
+        }
+    }, 1000);
 }
 
 // ============ GALLERY ============
